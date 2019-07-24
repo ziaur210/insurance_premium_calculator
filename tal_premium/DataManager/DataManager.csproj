@@ -44,7 +44,11 @@
     <Compile Include="BusinessEnum.cs" />
     <Compile Include="Managers\BaseManager.cs" />
     <Compile Include="Managers\CustomerManager.cs" />
+    <Compile Include="Managers\Interfaces\ICustomerManager.cs" />
     <Compile Include="Managers\Interfaces\IManager.cs" />
+    <Compile Include="Managers\Interfaces\IOccupationManager.cs" />
+    <Compile Include="Managers\OccupationManager.cs" />
+    <Compile Include="Managers\OccupationRatingManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
