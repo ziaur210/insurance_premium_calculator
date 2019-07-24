@@ -12,8 +12,14 @@ namespace Webapi.Controllers
     [RoutePrefix("api/customer")]
     public class CustomerController : BaseapiController 
     {
-        IManager<Customer> _manager = new CustomerManager();  
-             
+        private readonly IManager<Customer> _manager = null;
+        private readonly  ICustomerManager<Customer> _customerManager = null;
+        public CustomerController(): base()
+        {
+             _manager = new CustomerManager();
+             _customerManager = new CustomerManager();
+        }
+
         [HttpGet]   
         [Route("List/{searchKey}")]
         public virtual IList<Customer> List(string searchKey)
@@ -25,7 +31,7 @@ namespace Webapi.Controllers
         [Route("List")]
         public virtual IList<Customer> List()
         {
-            IList<Customer> items = _manager.GetAll("");
+            IList<Customer> items = _customerManager.GetAllCustomerDetails("");
             return items;
         }
 
