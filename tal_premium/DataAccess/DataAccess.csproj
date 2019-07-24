@@ -53,8 +53,14 @@
     <Compile Include="DataContext.cs" />
     <Compile Include="DataRepository\BaseRepository.cs" />
     <Compile Include="DataRepository\CustomerRepository.cs" />
+    <Compile Include="DataRepository\Interface\IOccupationRepository.cs" />
+    <Compile Include="DataRepository\Interface\ICustomerRepository.cs" />
     <Compile Include="DataRepository\Interface\IRepository.cs" />
+    <Compile Include="DataRepository\OccupationRatingRepository.cs" />
+    <Compile Include="DataRepository\OccupationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultOccupationRating.cs" />
+    <Compile Include="ResultCustomerDetails.cs" />
     <Compile Include="talCustomer.cs" />
     <Compile Include="talOccupation.cs" />
     <Compile Include="talRating.cs" />

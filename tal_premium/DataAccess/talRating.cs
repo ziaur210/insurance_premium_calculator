@@ -3,7 +3,7 @@ namespace DataAccess
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Table("tblRating")]
+    [Table("talRating")]
     public partial class talRating
     {
         [Key]
@@ -13,7 +13,7 @@ namespace DataAccess
         [StringLength(127)]
         public string Name { get; set; }
 
-        public double Factor { get; set; }
+        public decimal Factor { get; set; }
 
         [Required]
         [StringLength(127)]

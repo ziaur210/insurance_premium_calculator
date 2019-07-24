@@ -1,12 +1,9 @@
 namespace DataAccess
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
-    [Table("tblOccupation")]
+    [Table("talOccupation")]
     public partial class talOccupation
     {
         [Key]
@@ -16,7 +13,7 @@ namespace DataAccess
         [StringLength(127)]
         public string Name { get; set; }
 
-        public long RattingId { get; set; }
+        public int RatingId { get; set; }
 
         [Required]
         [StringLength(127)]

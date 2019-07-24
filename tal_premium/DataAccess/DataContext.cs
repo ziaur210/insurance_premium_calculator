@@ -18,6 +18,9 @@ namespace DataAccess
             modelBuilder.Entity<talCustomer>()
                 .Property(e => e.InsuranceAmount)
                 .HasPrecision(18, 3);
+            modelBuilder.Entity<talRating>()
+               .Property(e => e.Factor)
+               .HasPrecision(18, 2);
         }
 
     } // class

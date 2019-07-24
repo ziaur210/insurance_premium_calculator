@@ -17,7 +17,7 @@ namespace DataAccess
         [Column(TypeName = "datetime2")]
         public DateTime DOB { get; set; }
 
-        public long OccupationId { get; set; }
+        public int OccupationId { get; set; }
 
         public decimal InsuranceAmount { get; set; }
 
@@ -25,12 +25,16 @@ namespace DataAccess
 
         public byte CustomerStatus { get; set; }
 
-        public long CreatedBy { get; set; }
+        public int CreatedBy { get; set; }
 
         public DateTime CreatedOn { get; set; }
 
-        public long UpdatedBy { get; set; }
+        public int UpdatedBy { get; set; }
 
         public DateTime UpdatedOn { get; set; }
+
+        [Required]
+        [StringLength(127)]
+        public string Description { get; set; }
     }
 }
