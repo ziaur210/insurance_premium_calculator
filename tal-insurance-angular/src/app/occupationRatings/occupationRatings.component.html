@@ -1,0 +1,19 @@
+<h2>Customer occupation ratings</h2>
+<div style="clear:both;margin: 5px 0px 10px 5px;" class="">
+  <div style="float: left;padding-left: 10px;width:10%;"><strong>Rating</strong></div>
+  <div style="float: left;padding-left: 10px;width:10%;"><strong>RatingFactor</strong></div>
+  <div style="float: left;padding-left: 10px;">
+  </div>
+  <div style="clear: both;border-bottom:1px solid #000;">
+  </div>
+</div>
+<div *ngFor="let occupationRating of occupationRatings" style="clear:both;margin: 5px 0px 0px 5px;min-height: 25px;" class="">
+  <div style="float: left;padding-left: 10px;width:10%;">{{occupationRating.Name}}</div>
+   <div style="float: left;padding-left: 10px;width:10%;">{{occupationRating.Factor}}</div>
+   
+  <div style="float: left;padding-left: 10px;">
+  </div>
+  <div style="clear: both;border-bottom:1px solid #000;">
+
+  </div>
+</div>

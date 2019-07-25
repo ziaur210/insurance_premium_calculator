@@ -37,12 +37,7 @@
     <div>
       <select #occupationId (change)="calculatePremium(dob.value,occupationId.value,insuranceAmount.value)">
         <option value="0">please select occupation</option>
-        <option value="1">Cleaner</option>
-        <option value="2">Doctor</option>
-        <option value="3">Author</option>
-        <option value="4">Farmer</option>
-        <option value="5">Mechanic</option>
-        <option value="6">Florist</option>
+        <option *ngFor="let occupation of occupations" [value]="occupation.Id">{{occupation.Name}}</option>       
       </select>
     </div>
   </div>
@@ -85,14 +80,14 @@
   </div>
 </div>
 <div style="clear:both;margin: 5px 0px 10px 5px;" class="">
-  <div style="float: left;padding-left: 10px;width:10%;"><strong>Name</strong></div>
-  <div style="float: left;padding-left: 10px;width:10%;">Age (Years)</div>
-  <div style="float: left;padding-left: 10px;width:10%;"> DOB <br /> (mm/dd/yyyy)</div>
-  <div style="float: left;padding-left: 10px;width:10%;"> Occupation</div>
-  <div style="float: left;padding-left: 10px;width:10%;">Occupation<br />Rating</div>
-  <div style="float: left;padding-left: 10px;width:10%;">Rating<br />Factor</div>
-  <div style="float: left;padding-left: 10px;width:10%;">Insurance<br />Amount(AU$)</div>
-  <div style="float: left;padding-left: 10px;width:10%;">Monthly <br />
+  <div class="gridCol"><strong>Name</strong></div>
+  <div class="gridCol">Age (Years)</div>
+  <div class="gridCol"> DOB <br /> (mm/dd/yyyy)</div>
+  <div class="gridCol"> Occupation</div>
+  <div class="gridCol">Occupation<br />Rating</div>
+  <div class="gridCol">Rating<br />Factor</div>
+  <div class="gridCol">Insurance<br />Amount(AU$)</div>
+  <div class="gridCol">Monthly <br />
     premium(AU$)</div>
   <div style="float: left;padding-left: 10px;">
   </div>
@@ -100,14 +95,14 @@
   </div>
 </div>
 <div *ngFor="let customer of customers" style="clear:both;margin: 5px 0px 0px 5px;min-height: 25px;" class="">
-  <div style="float: left;padding-left: 10px;width:10%;">{{customer.Name}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">{{insurancePremiumUtiltiy.getAge(customer.DOB)}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;"> {{customer.DOB | date:'shortDate'}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;"> {{customer.OccupationName}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">{{customer.OccupationRatingName}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">{{customer.OccupationRatingFactor}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">{{customer.InsuranceAmount | currency:'AUD'}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">
+  <div class="gridCol">{{customer.Name}}</div>
+  <div class="gridCol">{{insurancePremiumUtiltiy.getAge(customer.DOB)}}</div>
+  <div class="gridCol"> {{customer.DOB | date:'shortDate'}}</div>
+  <div class="gridCol"> {{customer.OccupationName}}</div>
+  <div class="gridCol">{{customer.OccupationRatingName}}</div>
+  <div class="gridCol">{{customer.OccupationRatingFactor}}</div>
+  <div class="gridCol">{{customer.InsuranceAmount | currency:'AUD'}}</div>
+  <div class="gridCol">
     {{((customer.InsuranceAmount*customer.OccupationRatingFactor*getAge(customer.DOB))/1000*12).toFixed(2) | currency:'AUD'}}
   </div>
   <div style="float: left;padding-left: 10px;">

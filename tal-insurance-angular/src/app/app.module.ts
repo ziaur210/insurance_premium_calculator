@@ -5,8 +5,11 @@ import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule }     from './app-routing.module';
 
 import { AppComponent }         from './app.component';
-// customer component
+
 import { CustomersComponent }   from './customers/customers.component';
+import { OccupationsComponent }      from './occupations/occupations.component';
+import { OccupationRatingsComponent }      from './occupationRatings/occupationRatings.component';
+
 
 @NgModule({
   imports: [
@@ -17,7 +20,9 @@ import { CustomersComponent }   from './customers/customers.component';
   ],
   declarations: [
     AppComponent,
-    CustomersComponent
+    CustomersComponent,
+    OccupationsComponent,
+    OccupationRatingsComponent,
   ],
   bootstrap: [ AppComponent ]
 })
