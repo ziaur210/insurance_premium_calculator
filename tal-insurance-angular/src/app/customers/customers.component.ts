@@ -1,114 +1,100 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Customer } from '../customer';
+import { InsurancePremium } from '../customer';
+import { InsurancePremiumUtility } from '../customer';
 import { CustomerService } from '../customer.service';
 
+'use strict'
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css']
 })
-export class CustomersComponent implements OnInit {
 
+export class CustomersComponent implements OnInit {
   customers: Customer[];
   ratingFactor: number;
   monthlyPremium: number;
+  newCustomerAge: number = 0;
+  uiMsg: string = "";
 
-  constructor(private customerService: CustomerService) { }
+  readonly insurancePremiumUtiltiy: InsurancePremiumUtility;
+
+  constructor(private customerService: CustomerService) {
+    this.insurancePremiumUtiltiy = new Customer("", "", 0, 0);
+  }
 
   ngOnInit() {
     this.getCustomers();
   }
-
+  // get customers
   getCustomers(): void {
     this.customerService.getCustomers()
       .subscribe(items => this.customers = items);
   }
- // add customer
+  // add customer
   add(name: string, dob: string, occupationId: number, insuranceAmount: number): void {
     // validate data
     name = name.trim();
     dob = dob.trim();
-    if (!name
-      || !dob
-    ) { return; }
+    if (name.length == 0
+      || dob.length == 0
+      || insuranceAmount == 0
+      || occupationId == 0
+    ) {
+      window.alert('Customer name, DOB, Occupation, Insurance amount are required input fields!');
+      return;
+    }
 
     const customerToAdd: Customer = new Customer(name, dob, occupationId, insuranceAmount);
     this.customerService.addCustomer(customerToAdd)
-      .subscribe(item => {       
-        // customerToAdd.OccupationName = '';
-        // this.customers.push(customerToAdd);
+      .subscribe(item => {
+        this.uiMsg = 'New customer added successfully.';
         // refresh customer list
         this.getCustomers();
       });
   }
+
   // get age
-  getAge(dob: string): number 
-  {
-    var now = new Date();
-    var birthDate = new Date(dob);
-    var timeDiff = Math.abs(now.getTime() - birthDate.getTime());
-    var dayDifference = parseFloat((timeDiff / (1000 * 3600 * 24 * 365)).toFixed(2));
-    return dayDifference;
+  getAge(dob: string): number {
+    return this.insurancePremiumUtiltiy.getAge(dob);
   }
+  // calculate age 
+  calculateAge(dob: string): void {
+    const age = this.insurancePremiumUtiltiy.getAge(dob);
+    this.newCustomerAge = age;
+    console.log(`newCustomerAge : ${age}`);
+  }
+
   // calculate montly premium
-  calculatePremium(dob: string, occupationId: number, insuranceAmount: number): number 
-  {   
+  calculatePremium(dob: string, occupationId: number, insuranceAmount: number): void {
+    // clear msg if any
+    if (this.uiMsg.length > 0) { this.uiMsg = ""; }
     // validate data
-    if (dob.trim() == ""
+    if (dob.trim().length == 0
       || occupationId == 0
       || insuranceAmount == 0
-    )
+    ) {
+      window.alert('DOB, Occupation, Insurance amount are required input fields!');
       return;
+    }
 
-    const age: number = this.getAge(dob);
-    const OccupationRatingFactor: number = this.getOccupationFactor(occupationId);
+    let InsurancePremiumParams = {} as InsurancePremium;
+    InsurancePremiumParams.DOB = dob;
+    InsurancePremiumParams.OccupationId = occupationId;
+    InsurancePremiumParams.InsuranceAmount = insuranceAmount;
+
+    const age = this.insurancePremiumUtiltiy.getAge(dob);
+    this.newCustomerAge = age;
+
+    const OccupationRatingFactor: number = this.insurancePremiumUtiltiy.getCustomerOccupationRatingFactor(occupationId);
+    // update ui for rating factor
     this.ratingFactor = OccupationRatingFactor;
-    console.log(`${insuranceAmount} ${OccupationRatingFactor} ${age} `);
-    const mPremium: number = parseFloat(((insuranceAmount * OccupationRatingFactor * age) / 1000 * 12).toFixed(2));
-    console.log(`montlyPremium = ${mPremium}`);
+    const mPremium: number = this.insurancePremiumUtiltiy.getMonthlyPremium(InsurancePremiumParams);  
+    // update ui for monthly premium
     this.monthlyPremium = mPremium;
-    return mPremium;
+    return;
   }
-
-  //-----------------------------------------
-  getOccupationFactor(occupationId: number): number {
-    return this.getOccupationRatingFactor(this.getOccupationRatingId(occupationId));
-  }
-  //---------------------------------------
-  getOccupationRatingId(occupationId: number): number {
-    switch (occupationId % 7) {
-      case 1:
-        return 3;
-      case 2:
-        return 1;
-      case 3:
-        return 2;
-      case 4:
-        return 4;
-      case 5:
-        return 4;
-      case 6:
-        return 3;
-      default:
-        return 0;
-    }
-  } // function
-
-  getOccupationRatingFactor(ratingId: number): number {
-    // let ratingFactor: number = 0;
-    switch (ratingId % 5) {
-      case 1:
-        return 1.00;
-      case 2:
-        return 1.25;
-      case 3:
-        return 1.50;
-      case 4:
-        return 1.75;
-      default:
-        return 0;
-    }
-  } // function
 
 } // class

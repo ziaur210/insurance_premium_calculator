@@ -1,4 +1,9 @@
 <h2>Customers</h2>
+<div style="padding-left:10px;">
+  <span style="color: green;">
+    <strong>{{uiMsg? uiMsg : "" }}</strong>
+  </span>
+</div>
 <div>
   <div style="float: left;padding-left:10px;">
     <div>
@@ -13,7 +18,7 @@
       <label>Age</label>
     </div>
     <div>
-      {{25}} years
+      {{newCustomerAge?newCustomerAge:0}} years
     </div>
   </div>
   <div style="float: left;padding-left:10px;">
@@ -21,7 +26,8 @@
       <label>DOB</label>
     </div>
     <div>
-      <input type="date" #dob value="1990-07-22" min="1920-01-01" max="2020-12-31" />
+      <input type="date" #dob value="1990-07-22" min="1920-01-01" max="2020-12-31"
+        (change)="calculateAge(dob.value);"/>
     </div>
   </div>
   <div style="float: left;padding-left:10px;">
@@ -53,12 +59,12 @@
       <label>Insurance amount</label>
     </div>
     <div>
-      <input type="number" #insuranceAmount />
+      <input type="number" #insuranceAmount  placeholder="required!" />
     </div>
   </div>
   <div style="float: left;padding-left:10px;">
     <div>
-      <label>Monthly premium</label>
+      <label>Monthly premium (AU$)</label>
     </div>
     <div>
       <input [(ngModel)]="monthlyPremium" readonly />
@@ -75,15 +81,13 @@
     </div>
   </div>
 
-
-  <div style="clear: both">
-
+  <div style="clear: both;border-bottom:1px dotted #000;min-height:10px;">
   </div>
 </div>
-<div style="clear:both;margin: 5px 0px 0px 5px;" class="">
-  <div style="float: left;padding-left: 10px;width:10%;">Name</div>
+<div style="clear:both;margin: 5px 0px 10px 5px;" class="">
+  <div style="float: left;padding-left: 10px;width:10%;"><strong>Name</strong></div>
   <div style="float: left;padding-left: 10px;width:10%;">Age (Years)</div>
-  <div style="float: left;padding-left: 10px;width:10%;"> DOB</div>
+  <div style="float: left;padding-left: 10px;width:10%;"> DOB <br /> (mm/dd/yyyy)</div>
   <div style="float: left;padding-left: 10px;width:10%;"> Occupation</div>
   <div style="float: left;padding-left: 10px;width:10%;">Occupation<br />Rating</div>
   <div style="float: left;padding-left: 10px;width:10%;">Rating<br />Factor</div>
@@ -92,18 +96,23 @@
     premium(AU$)</div>
   <div style="float: left;padding-left: 10px;">
   </div>
+  <div style="clear: both;border-bottom:1px solid #000;">
+  </div>
 </div>
-<div *ngFor="let customer of customers" style="clear:both;margin: 5px 0px 0px 5px;" class="">
+<div *ngFor="let customer of customers" style="clear:both;margin: 5px 0px 0px 5px;min-height: 25px;" class="">
   <div style="float: left;padding-left: 10px;width:10%;">{{customer.Name}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">{{getAge(customer.DOB)}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;"> {{customer.DOB | date}}</div>
+  <div style="float: left;padding-left: 10px;width:10%;">{{insurancePremiumUtiltiy.getAge(customer.DOB)}}</div>
+  <div style="float: left;padding-left: 10px;width:10%;"> {{customer.DOB | date:'shortDate'}}</div>
   <div style="float: left;padding-left: 10px;width:10%;"> {{customer.OccupationName}}</div>
   <div style="float: left;padding-left: 10px;width:10%;">{{customer.OccupationRatingName}}</div>
   <div style="float: left;padding-left: 10px;width:10%;">{{customer.OccupationRatingFactor}}</div>
-  <div style="float: left;padding-left: 10px;width:10%;">{{customer.InsuranceAmount}}</div>
+  <div style="float: left;padding-left: 10px;width:10%;">{{customer.InsuranceAmount | currency:'AUD'}}</div>
   <div style="float: left;padding-left: 10px;width:10%;">
-    {{((customer.InsuranceAmount*customer.OccupationRatingFactor*getAge(customer.DOB))/1000*12).toFixed(2) }}
+    {{((customer.InsuranceAmount*customer.OccupationRatingFactor*getAge(customer.DOB))/1000*12).toFixed(2) | currency:'AUD'}}
   </div>
   <div style="float: left;padding-left: 10px;">
+  </div>
+  <div style="clear: both;border-bottom:1px solid #000;">
+
   </div>
 </div>

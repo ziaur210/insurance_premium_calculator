@@ -1,6 +1,7 @@
 {
-  "compileOnSave": false,
+  "compileOnSave": true,
   "compilerOptions": {
+    "noImplicitAny": true, // added
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
@@ -11,14 +12,24 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
+    // "typeRoots": [
+    //   "node_modules/@types"
+    // ],
     "typeRoots": [
-      "node_modules/@types"
+      "./typings"
     ],
     "lib": [
       "es2018",
       "dom"
     ]
   },
+  "include": [ // added
+    "src/**/*"
+  ],
+  "exclude": [ // added
+    "node_modules",
+    "**/*.spec.ts"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
