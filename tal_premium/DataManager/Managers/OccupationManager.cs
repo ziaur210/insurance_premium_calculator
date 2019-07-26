@@ -29,8 +29,8 @@ namespace DataManager
                 {
                     Id = o.OccupationId,
                     Name = o.OccupationName,
-                    RattingId = o.RatingId,
-                    RattingName = o.RatingName,
+                    RatingId = o.RatingId,
+                    RatingName = o.RatingName,
                     RatingFactor = o.RatingFactor
                 };
                 items.Add(item);

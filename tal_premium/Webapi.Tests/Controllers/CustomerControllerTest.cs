@@ -51,17 +51,17 @@ namespace Webapi.Controllers.Tests
                 Name = "customer1"
             };
             // Act
-            int newLocationID = 0;
+            int newCustomerID = 0;
             try
             {
-                newLocationID =  mockingController.Object.Add(projectToAdd);
+                newCustomerID =  mockingController.Object.Add(projectToAdd);
             }
             catch (Exception)
             {
-                newLocationID = 2;
+                newCustomerID = 2;
             }
             // Assert
-            Assert.IsTrue(newLocationID == 1);
+            Assert.IsTrue(newCustomerID == 1);
         }
 
         #region Miscellaneous

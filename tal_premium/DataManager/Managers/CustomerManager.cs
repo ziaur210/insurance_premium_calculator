@@ -48,11 +48,13 @@ namespace DataManager
         {
             talCustomer itemRepository = new talCustomer()
             {
-                CustomerId = item.Id,
-                OccupationId = item.OccupationId,
                 Name = item.Name,
+                OccupationId = item.OccupationId,
                 DOB = item.DOB,
-                CustomerStatus = (byte)CustomerStatus.Active,
+                InsuranceAmount = item.InsuranceAmount,
+                InsuranceType = (byte)InsuranceType.Death,
+                CustomerStatus = (byte)CustomerStatus.Active,  
+                Description = "test customer",
                 CreatedBy = 1,
                 CreatedOn = DateTime.Now,
                 UpdatedBy = 1,
